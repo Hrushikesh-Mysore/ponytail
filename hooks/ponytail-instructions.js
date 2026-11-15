@@ -54,7 +54,7 @@ function getFallbackInstructions(mode) {
     "\n" +
     "Take the first option that fully works:\n" +
     "\n" +
-    "1. Does it need to exist? Skip features, options and flexibility nobody asked for, and name them in one line. A vague request (\"build me X\") gets the smallest version that does the core job.\n" +
+    "1. Does it need to exist? Skip features, options and flexibility nobody asked for, and name them in one line. A vague request (\"build me X\") in an existing project gets the smallest version that does the core job. A new project stops first for the stack recommendation the user's CLAUDE.md asks for.\n" +
     "2. Already in this codebase (a helper, component, service, pattern)? Use it the way the surrounding code does.\n" +
     "3. Standard library or a platform feature? Use it, unless the project has its own. A house component beats a native widget.\n" +
     "4. An installed dependency? Use it. Never add a dependency for a few lines.\n" +
@@ -62,13 +62,13 @@ function getFallbackInstructions(mode) {
     "6. Otherwise: the minimum code that works.\n" +
     "\n" +
     "- Be lazy about the solution, never about the change itself: finish every part the task needs, including the callers, tests and fixtures your change breaks.\n" +
-    "- No abstraction, wrapper, type conversion, option, config, boilerplate or \"for later\" code nobody asked for. Keep values in the form the platform already gives you. Deletion beats addition. Keep the structure the codebase already has: its layers, interfaces and conventions.\n" +
+    "- No abstraction, wrapper, type conversion, option, config, boilerplate or \"for later\" code nobody asked for. What the user's CLAUDE.md requires (linter, formatter, type checker, tests, shared types and validation, a README) is asked for, not boilerplate. Keep values in the form the platform already gives you. Deletion beats addition. Keep the structure the codebase already has: its layers, interfaces and conventions.\n" +
     "- The shortest working diff wins, once you know everything it must touch. A one-liner that needs decoding is not short.\n" +
-    "- Comment only the why the code cannot show, in one line.\n" +
+    "- Comments: follow the user's CLAUDE.md (a header on every file, one line on every function). Beyond that, comment only the why the code cannot show, in one line.\n" +
     "- Bug fix: before you edit, grep every caller of the function you touch, then fix the root cause once in the shared code.\n" +
     "- Code you move or merge keeps its error handling and validation.\n" +
     "- Between options of equal size, take the one that is correct on edge cases.\n" +
-    "- Lazy code without its check is unfinished: new non-trivial logic (a branch, a loop, a parser, money or security, or a whole new script or app) leaves one small test or an assert-based self-check. Trivial changes need none.\n" +
+    "- Lazy code without its check is unfinished: new non-trivial logic in a project (a branch, a loop, a parser, money or security, or a whole new app) leaves one small test or an assert-based self-check. Trivial changes and one-off scripts need none unless the user asks.\n" +
     "- A shortcut with a known limit gets a code comment in this form: `shortcut: <the limit>, <when to upgrade>`.\n" +
     "\n" +
     "Never cut: validation at trust boundaries, error handling that prevents data loss, security, accessibility, the calibration real hardware needs, anything the user asked for.\n";
